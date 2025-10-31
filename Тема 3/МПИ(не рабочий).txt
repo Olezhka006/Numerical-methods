@@ -1,0 +1,55 @@
+import math
+N = 13
+alpha = 2 / N
+n = 4
+eps = 10 ** -11
+a = [[5.8, 0.2, 1.3, 0.7 + alpha],[4, 6.3 + alpha, 0.9, 1],[2, 1.3, 5 + alpha, 0.5],[1 + alpha, 2.5, 3.3, 9]]
+b = [1.9 + 4.8 * alpha,0.8 + 4 * alpha,9.5 + 4 * alpha,alpha**2 + alpha - 2.4]
+print("Ввод данных завершен")
+print("Матрица A:")
+for i in range(n):
+    for j in range(n):
+        print(f"{a[i][j]:.4f}", end=" ")
+    print()
+print("\nВектор B:")
+for i in range(n):
+    print(f"{b[i]:.4f}", end=" ")
+print()
+print(f"\nТочность: {eps:.11f}")
+norm_row = 0.0
+for i in range(n):
+    row_sum = 0.0
+    for j in range(n):
+        row_sum += abs(a[i][j])
+    if row_sum > norm_row:
+        norm_row = row_sum
+print(f"norm = max Σ|aᵢⱼ| = {norm_row:.6f}")
+print(f"Условие сходимости: norm < 1 = {norm_row < 1}")
+print(f"Норма матрицы: {al:.6f}")
+if al < 1:
+    x = [0] * n
+    for i in range(n):
+        x[i] = b[i]
+    i = -1
+    while True:
+        s = 0.0
+        i += 1
+        y = [0.0] * n
+        for k in range(n):
+            y[k] = b[k]
+            for j in range(n):
+                y[k] = y[k] + a[k][j] * x[j]
+            s = s + (x[k] - y[k]) ** 2
+        for k in range(n):
+            x[k] = y[k]
+        s_sqrt = math.sqrt(s)
+        condition = eps * (1 - al) / al
+        print(f"Итерация {i}: √s = {s_sqrt:.6f}")
+        if s_sqrt < condition:
+            break
+    print(f"\nИтерационный процесс окончен. Число итераций = {i}")
+    print("Решение системы")
+    for k in range(n):
+        print(f"x[{k+1}] = {x[k]:.4f} ", end="")
+else:
+    print("Условие не выполняется")
