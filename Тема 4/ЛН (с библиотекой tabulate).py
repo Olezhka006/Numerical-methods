@@ -206,7 +206,7 @@ print("=" * 50)
 print("ОБЩИЙ РЕЗУЛЬТАТ".center(50))
 print("=" * 50)
 
-comparison_data = [
+data = [
     ["x1 = 0.2200", 
      l1(points_x1_1, x1),
      l2(points_x1_2, x1),
@@ -226,9 +226,10 @@ comparison_data = [
      n2(x_x3_2, y_x3_2, x3, 2)]
 ]
 
-print(tabulate(comparison_data, 
+print(tabulate(data, 
                headers=["Точка", "Лагранж 1ст", "Лагранж 2ст", "Ньютон 1ст", "Ньютон 2ст"],
                tablefmt="grid",
                floatfmt=".4f"))
+
 
 input()
